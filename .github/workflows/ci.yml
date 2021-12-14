@@ -15,10 +15,7 @@ jobs:
         with:
           gradle-version: current
           arguments: jar
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        name: Release
-        uses: ridedott/release-me-action@master
+      - uses: ncipollo/release-action@v1
         with:
-          release-assets: |
-            ./build/build/FishSell-1.0-SNAPSHOT.jar
+          artifacts: "build/build/FishSell-1.0-SNAPSHOT.jar"
+          token: ${{ secrets.GITHUB_TOKEN }}
