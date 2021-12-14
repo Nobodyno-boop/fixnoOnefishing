@@ -1,5 +1,9 @@
 name: Build plugin on push
-on: push
+on: 
+  push:
+    tags:
+    - '*'
+
 jobs:
   gradle:
     strategy:
