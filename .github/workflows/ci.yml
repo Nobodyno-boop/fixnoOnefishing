@@ -1,4 +1,4 @@
-name: Run Gradle on PRs
+name: Build plugin on push
 on: push
 jobs:
   gradle:
@@ -13,6 +13,7 @@ jobs:
           java-version: 11
       - uses: gradle/gradle-build-action@v2
         with:
+          gradle-version: current
           arguments: jar
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
