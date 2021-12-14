@@ -12,3 +12,4 @@ Because the actual version have a major bug (the 1.2.0).
 - Using `PlayerCommandPreprocessEvent` so just enjoy this fix
 
 
+Nobody.
