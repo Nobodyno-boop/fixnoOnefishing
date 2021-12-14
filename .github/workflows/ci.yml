@@ -1,8 +1,5 @@
 name: Build plugin on push
-on: 
-  push:
-    tags:
-    - '*'
+on: push
 
 jobs:
   gradle:
@@ -21,5 +18,6 @@ jobs:
           arguments: jar
       - uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
           artifacts: "build/build/FishSell-1.0-SNAPSHOT.jar"
           token: ${{ secrets.GITHUB_TOKEN }}
