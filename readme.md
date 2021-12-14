@@ -10,6 +10,13 @@ Because the actual version have a major bug (the 1.2.0).
 
 - Replace the current command `nfsell inventory` by the [fixing command]()
 - Using `PlayerCommandPreprocessEvent` so just enjoy this fix
+- you can use fishsell its work too.
+- When you reload NoOneFishing its still work :)
+
+
+# Download
+
+just take a look to [release](https://github.com/Nobodyno-boop/fixnoOnefishing/releases)
 
 
 Nobody.
