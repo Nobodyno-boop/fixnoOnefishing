@@ -19,5 +19,6 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
+          tag: 1.0
           artifacts: "build/build/FishSell-1.0-SNAPSHOT.jar"
           token: ${{ secrets.GITHUB_TOKEN }}
