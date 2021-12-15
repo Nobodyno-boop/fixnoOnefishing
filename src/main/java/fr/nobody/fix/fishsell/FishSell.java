@@ -7,6 +7,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
+import fr.nobody.fix.fishsell.Updater;
 
 public final class FishSell extends JavaPlugin {
     private static FishSell instance;
@@ -29,7 +30,7 @@ public final class FishSell extends JavaPlugin {
             remoteConfig = new RemoteConfig();
             this.getCommand("fishsell").setExecutor(new FishSells());
             Bukkit.getServer().getPluginManager().registerEvents(new CmdProcess(), this);
-            new Updater(this);
+            Updater updater = new Updater(this);
         } else {
             log.severe(String.format("[%s] - Disabled due to no NoOneFishing dependency found!", getDescription().getName()));
         }
