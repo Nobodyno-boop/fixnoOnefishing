@@ -20,7 +20,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RemoteConfig {
-    private FileConfiguration f;
+    private FileConfiguration f; // config.yml
+    // for support hex color in >1.16
     private static final Pattern HEX_PATTERN = Pattern.compile("(#\\w{6})");
 
     public RemoteConfig() {
@@ -33,20 +34,24 @@ public class RemoteConfig {
             PersistentDataContainer container = fish.getItemMeta().getPersistentDataContainer();
             if(!container.isEmpty()){
                 Plugin pl = Bukkit.getPluginManager().getPlugin("NoOneFishing");
+                // Price can be null when OneFishing do some weird thing
                 NamespacedKey nbtprice = new NamespacedKey(pl, "nf-fish-price");
                 NamespacedKey nbtweight = new NamespacedKey(pl, "nf-fish-weight");
                 NamespacedKey nbtrarity = new NamespacedKey(pl, "nf-fish-rarity");
 
-                Float weight = (Float)container.get(nbtweight, PersistentDataType.FLOAT);
-                String rarity = (String)container.get(nbtrarity, PersistentDataType.STRING);
-                Double pr = (Double)container.get(nbtprice, PersistentDataType.DOUBLE);
+
+                Float weight = container.get(nbtweight, PersistentDataType.FLOAT);
+                String rarity = container.get(nbtrarity, PersistentDataType.STRING);
+                Double pr = container.getOrDefault(nbtprice, PersistentDataType.DOUBLE, -1.0);
                 Double d = f.getDouble("raritymod."+ rarity);
 
-                String formula = f.getString("settings.priceformula").replace("{price}", pr.toString()).replace("{weight}", weight.toString()).replace("{raritymod}", d.toString());
+                if(pr != -1.0){
+                    String formula = f.getString("settings.priceformula").replace("{price}", pr.toString()).replace("{weight}", weight.toString()).replace("{raritymod}", d.toString());
 
-                Double price = (new ExpressionBuilder(formula)).build().evaluate();
+                    Double price = (new ExpressionBuilder(formula)).build().evaluate();
+                    return price;
+                } else return -1.0;
 
-                return price;
             }else return -1.0;
         } else return -1.0;
     }
@@ -94,6 +99,7 @@ public class RemoteConfig {
 
 
     public void reloadConfig(){
+        // Use file.separator to avoid Unix path problem.
         f = YamlConfiguration.loadConfiguration(new File(FishSell.getInstance().getDataFolder() + "/../NoOneFishing/config.yml".replace("/", File.separator)));
     }
 

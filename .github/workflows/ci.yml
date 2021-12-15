@@ -1,5 +1,5 @@
 name: Build plugin on push
-on:
+on: 
   push:
     branches:
       - "master"
@@ -24,4 +24,6 @@ jobs:
           automatic_release_tag: "latest"
           prerelease: true
           title: "${{github.ref.name}}"
-          files: "build/build/FishSell-1.0-SNAPSHOT.jar"
+          files: |
+            build/build/FishSell-1.0-SNAPSHOT.jar
+            build.yml
