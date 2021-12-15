@@ -29,6 +29,7 @@ public final class FishSell extends JavaPlugin {
             remoteConfig = new RemoteConfig();
             this.getCommand("fishsell").setExecutor(new FishSells());
             Bukkit.getServer().getPluginManager().registerEvents(new CmdProcess(), this);
+            new Updater(this);
         } else {
             log.severe(String.format("[%s] - Disabled due to no NoOneFishing dependency found!", getDescription().getName()));
         }
