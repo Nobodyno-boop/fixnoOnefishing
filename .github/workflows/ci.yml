@@ -25,5 +25,5 @@ jobs:
           prerelease: true
           title: "${{github.ref.name}}"
           files: |
-            build/build/FishSell-1.0-SNAPSHOT.jar
+            build/build/*.jar
             build.yml
