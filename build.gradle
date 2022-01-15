@@ -33,7 +33,7 @@ dependencies {
     implementation('org.jooq:joor:0.9.14')
     // to evaluate settings.priceformula in config NoOneFishing
     implementation('net.objecthunter:exp4j:0.4.8')
-    implementation(files('libs/javassist.jar'))
+    implementation(files('libs\\javassist.jar'))
 
 
 }
@@ -64,8 +64,8 @@ processResources {
     }
 }
 
-jar {
 
+jar {
     manifest {
         attributes "Premain-Class" : "fr.nobody.fix.fishsell.fix.Fix"
     }
