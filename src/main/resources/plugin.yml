@@ -7,8 +7,8 @@ authors: [ Nobody ]
 description: A plugin for fix nfsell inventory
 website: https://github.com/Nobodyno-boop/fixnoOnefishing
 depend:
-  - "NoOneFishing"
   - "Vault"
+  - "NoOneFishing"
 commands:
   fishsell:
     description: replace the basic command

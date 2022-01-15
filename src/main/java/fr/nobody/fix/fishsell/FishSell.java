@@ -1,11 +1,13 @@
 package fr.nobody.fix.fishsell;
 
+
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 import fr.nobody.fix.fishsell.Updater;
 
