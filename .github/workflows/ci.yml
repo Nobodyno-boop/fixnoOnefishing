@@ -19,6 +19,8 @@ jobs:
           gradle-version: wrapper
       - name: Make gradlew executable # https://github.com/actions/starter-workflows/issues/171#issuecomment-555036259
         run: chmod +x ./gradlew
+      - name: Sync Gradle dependencies
+        run: ./gradlew dependencies
       - name: Execute Gradle build
         run: ./gradlew build
       - uses: "marvinpinto/action-automatic-releases@latest"
