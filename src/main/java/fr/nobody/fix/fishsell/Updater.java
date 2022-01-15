@@ -29,8 +29,6 @@ public class Updater {
         }catch (Exception e){
             work = false;
         }
-
-
     }
 
 }

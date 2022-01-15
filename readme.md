@@ -9,7 +9,15 @@ just take a look to [release](https://github.com/Nobodyno-boop/fixnoOnefishing/r
 # Why ? 
 Because the actual version have a major bug (the 1.2.0).
 
+---
+Duplication probleme
+
 ![image](./md/bug.gif)
+
+
+- Hex color not support in 1.18
+
+
 
 # The fix
 
@@ -19,7 +27,16 @@ Because the actual version have a major bug (the 1.2.0).
 - When you reload NoOneFishing its still work :)
 
 
+# Fix the color ? 
+just add this args in your startup server. (For 1.18+ before its work.)
+
+```shell
+    -javaagent:plugins/FishSell-1.2.jar
+```
+
 # Changelog
+## v1.2 - 15-01-2021
+ - Add instrument for javaAgent for modify the current hexMethod.
 ## v1.1 - 15-12-2021
  ### Added 
  - Updater for check the latest version and print a message at the startup
