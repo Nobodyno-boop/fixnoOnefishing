@@ -7,6 +7,9 @@ group = 'fr.nobody.fix'
 version = '1.2'
 
 repositories {
+    flatDir {
+        dirs 'libs'
+    }
     mavenCentral()
     maven {
         name = 'papermc-repo'
@@ -17,9 +20,7 @@ repositories {
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
     maven { url 'https://jitpack.io' }
-    flatDir {
-        dirs 'libs'
-    }
+
 }
 
 // put the jar in plugins folder for test fast or default folder is build.
