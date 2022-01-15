@@ -17,6 +17,8 @@ jobs:
       - uses: gradle/gradle-build-action@v2
         with:
           gradle-version: current
+      - name: Make gradlew executable # https://github.com/actions/starter-workflows/issues/171#issuecomment-555036259
+        run: chmod +x ./gradlew
       - name: Execute Gradle build
         run: ./gradlew build
       - uses: "marvinpinto/action-automatic-releases@latest"
