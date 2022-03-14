@@ -8,8 +8,6 @@ A Plugin for fix the sell command (in [NoOneFishing](https://www.spigotmc.org/re
     * [1.2 Hex color not support](#12-scope)
     * [1.3 solutions](#the-fix)
         + [1.3.1 fix the color](#fix-the-color-)
-        + [1.4.2 External References](#142-external-references)
-    * [1.5 Overview](#15-overview)
 
 # Why ?
 Because the actual version have a major bug (the 1.2.0).
