@@ -1,0 +1,16 @@
+fix:
+  command:
+    # fix the commandSell by my own command.
+    fix: true
+    # Enable the command /fishsell instead of /nfsell inventory
+    custom: true
+  slot:
+    #  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    #  !! need fix.command.fix enable  !!
+    #  !!         To work.             !!
+    #  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    head: false # Sell the head?
+    offhand: true # Sell off hand
+plugin:
+  update:
+    check: true

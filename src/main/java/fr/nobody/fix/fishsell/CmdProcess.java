@@ -8,12 +8,13 @@ public class CmdProcess implements Listener {
 
     @EventHandler
     public void event(PlayerCommandPreprocessEvent e){
-        if(e.getMessage().equalsIgnoreCase("/nfsell inventory")){
+        if(e.getMessage().equalsIgnoreCase("/nfsell inventory") && FishSell.getInstance().getConfig().getBoolean("fix.command.fix", false)){
             e.setCancelled(true);
             FishSell.getInstance().getRemoteConfig().sellfish(e.getPlayer());
         }
         if(e.getMessage().equalsIgnoreCase("/nfreload")){
             FishSell.getInstance().getRemoteConfig().reloadConfig();
         }
+
     }
 }

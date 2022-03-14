@@ -1,8 +1,10 @@
-package fr.nobody.fix.fishsell;
+package fr.nobody.fix.fishsell.config;
 
+import fr.nobody.fix.fishsell.FishSell;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.EconomyResponse;
 import net.objecthunter.exp4j.ExpressionBuilder;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -59,18 +61,33 @@ public class RemoteConfig {
     public void sellfish(Player p){
         AtomicReference<Double> z = new AtomicReference<>(0.0);
         AtomicReference<Integer> c = new AtomicReference<>(0);
-        Arrays.stream(p.getInventory().getContents()).forEach(itemStack -> {
-            if(itemStack != null){
-                Double d =  FishSell.getInstance().getRemoteConfig().ifFish(itemStack);
+        ItemStack[] contents = p.getInventory().getStorageContents();
 
-                if(d != -1.0){
-                    if(itemStack.getAmount() > 1){
-                        z.updateAndGet(v -> v + d * itemStack.getAmount());
-                    } else {
-                        z.updateAndGet(v -> v + d );
+        if(FishSell.getInstance().getConfig().getBoolean("fix.slot.head", false)){
+            contents = (ItemStack[]) ArrayUtils.add(contents, p.getInventory().getHelmet());
+        }
+        if(FishSell.getInstance().getConfig().getBoolean("fix.slot.offhand", false)){
+            contents = (ItemStack[]) ArrayUtils.add(contents, p.getInventory().getItemInOffHand());
+        }
+        Arrays.stream(contents).forEach(itemStack -> {
+
+            if(itemStack != null){
+                if(!(itemStack.isSimilar(p.getInventory().getHelmet()))){
+                    Double d =  FishSell.getInstance().getRemoteConfig().ifFish(itemStack);
+
+                    if(d != -1.0){
+                        if(itemStack.getAmount() > 1){
+                            z.updateAndGet(v -> v + d * itemStack.getAmount());
+                        } else {
+                            z.updateAndGet(v -> v + d );
+                        }
+                        c.updateAndGet(v -> v + itemStack.getAmount());
+                        if(FishSell.getInstance().getConfig().getBoolean("fix.slot.offhand", false) || FishSell.getInstance().getConfig().getBoolean("fix.slot.head", false) ){
+                            p.getInventory().removeItemAnySlot(itemStack);
+                        } else {
+                            p.getInventory().remove(itemStack);
+                        }
                     }
-                    c.updateAndGet(v -> v + itemStack.getAmount());
-                    p.getInventory().removeItemAnySlot(itemStack);
                 }
             }
         });

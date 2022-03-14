@@ -1,15 +1,18 @@
 package fr.nobody.fix.fishsell;
 
 
+import fr.nobody.fix.fishsell.command.FishReload;
+import fr.nobody.fix.fishsell.command.FishSells;
+import fr.nobody.fix.fishsell.config.RemoteConfig;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.logging.Logger;
-import fr.nobody.fix.fishsell.Updater;
 
 public final class FishSell extends JavaPlugin {
     private static FishSell instance;
@@ -20,6 +23,7 @@ public final class FishSell extends JavaPlugin {
     @Override
     public void onEnable() {
         // Basic vault hook.
+        this.saveDefaultConfig();
         instance = this;
         if (!setupEconomy() ) {
             log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
@@ -31,6 +35,7 @@ public final class FishSell extends JavaPlugin {
         if(pl != null && pl.isEnabled()){
             remoteConfig = new RemoteConfig();
             this.getCommand("fishsell").setExecutor(new FishSells());
+            this.getCommand("fishsellreload").setExecutor(new FishReload());
             Bukkit.getServer().getPluginManager().registerEvents(new CmdProcess(), this);
             Updater updater = new Updater(this);
         } else {
@@ -65,6 +70,9 @@ public final class FishSell extends JavaPlugin {
         return remoteConfig;
     }
 
+    public FileConfiguration getPluginConfig(){
+        return this.getConfig();
+    }
     public static Economy getEcon() {
         return econ;
     }
