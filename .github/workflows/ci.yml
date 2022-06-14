@@ -33,15 +33,17 @@ jobs:
         run: ./gradlew dependencies
       - name: Execute Gradle build
         run: ./gradlew build
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: release-drafter/release-drafter@v5
+        id: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload artifact and release
+        uses: nanoufo/action-upload-artifacts-and-release-assets@main
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          draft: true
-          title: "${{github.ref.name}}"
-          files: |
+          path: |
             build/build/*.jar
             build.yml
-      - uses: release-drafter/release-drafter@v5
+          upload-release-files: true
+          release-upload-url: ${{ steps.release.outputs.upload_url }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
