@@ -31,11 +31,11 @@ Because the actual version have a major bug (the 1.2.0).
 
 
 # Fix the color ? 
-Just add this args in your startup server. (For 1.18+ before its work.)
-You don't need to put the plugin in your plugins folder for works.
+Just add this JAVA args in your startup server. (For 1.18+ before its work.)
+*You don't need to put the plugin in your plugins folder for works.*
 
 ```shell
-    -javaagent:plugins/FishSell-1.2.jar
+    -javaagent:plugins/FishSell-x.jar
 ```
 
 # Download
@@ -47,13 +47,13 @@ config
 ===
 The default config
 
-| path | name | description |default |
-| --- | --- | --- | --- |
-| `fix.command.fix` | enable the command | Enable the command `/nsfsell inventory` by cancel this command and execute a script | true |
-| `fix.command.custom`| enable custom command | Enable the command `/fishsell` its like `/nsfsell inventory` | true
-| `fix.slot.head` | remove fish in head | Remove fish in head slot while execute `/nfsell Inventory` | true |
-| `fix.slot.offhand`| Remove fish in off hand | Remove the fish in offhand slot while execute `/nfsell Inventory` | true |
-|`plugin.update.check`| Check update | Check if the plugin can be updated only at the start | true |
+| path                  | name                    | description                                                                         | default |
+|-----------------------|-------------------------|-------------------------------------------------------------------------------------|---------|
+| `fix.command.fix`     | enable the command      | Enable the command `/nsfsell inventory` by cancel this command and execute a script | true    |
+| `fix.command.custom`  | enable custom command   | Enable the command `/fishsell` its like `/nsfsell inventory`                        | true    |
+| `fix.slot.head`       | remove fish in head     | Remove fish in head slot while execute `/nfsell Inventory`                          | true    |
+| `fix.slot.offhand`    | Remove fish in off hand | Remove the fish in offhand slot while execute `/nfsell Inventory`                   | true    |
+| `plugin.update.check` | Check update            | Check if the plugin can be updated only at the start                                | true    |
 
 
 
