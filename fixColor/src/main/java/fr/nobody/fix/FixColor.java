@@ -1,19 +1,20 @@
-package fr.nobody.fix.fishsell.fix;
+package fr.nobody.fix;
 
-import com.google.common.collect.Lists;
-import javassist.*;
+import javassist.ByteArrayClassPath;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.instrument.Instrumentation;
 import java.security.ProtectionDomain;
-import java.util.ArrayList;
+import java.util.logging.Logger;
 
-public class Fix implements ClassFileTransformer {
-
+public class FixColor implements ClassFileTransformer {
     public static void premain(String args, Instrumentation instrumentation)
     {
-        instrumentation.addTransformer(new Fix());
+        instrumentation.addTransformer(new FixColor());
     }
 
     @Override
@@ -21,9 +22,11 @@ public class Fix implements ClassFileTransformer {
         if (className == null) {
             return null;
         }
+
+        Logger log = Logger.getLogger("Minecraft");
         className = className.replace("/", ".");
         if (className.equalsIgnoreCase("me.nooneboss.Utils.ColorUtils") || className.equalsIgnoreCase("nf.noonefishing.NooneFishing")) {
-            System.out.println("BITE : "+ className);
+            log.warning("[FishSell][FixColor] Bite class:"+className);
             try {
                 ClassPool pool = ClassPool.getDefault();
                 pool.appendClassPath(new ByteArrayClassPath(className, classfileBuffer));
@@ -42,7 +45,7 @@ public class Fix implements ClassFileTransformer {
                         "            }"+
                         "return ChatColor.translateAlternateColorCodes('&', $1);}");
 
-                System.out.println("We fix the color on it!");
+                log.info("[FishSell][FixColor] Fix color method on class:"+className);
                 return ct.toBytecode();
             }catch (Exception e){
                 e.printStackTrace();
@@ -51,5 +54,4 @@ public class Fix implements ClassFileTransformer {
 
         return null;
     }
-
 }

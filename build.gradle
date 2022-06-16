@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'java-library'
 }
 
 group = 'fr.nobody.fix'
@@ -15,10 +14,8 @@ repositories {
         name = 'papermc-repo'
         url = 'https://papermc.io/repo/repository/maven-public/'
     }
-    maven {
-        name = 'sonatype'
-        url = 'https://oss.sonatype.org/content/groups/public/'
-    }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
     maven { url 'https://jitpack.io' }
 
 }
@@ -28,18 +25,18 @@ libsDirName = System.getenv().getOrDefault("dir", "./build")
 
 
 dependencies {
-    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    compileOnly 'org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT' // The Spigot API with no shadowing. Requires the OSS repo.
+//    compileOnly 'org.spigotmc:spigot:1.19-R0.1-SNAPSHOT' // The full Spigot server with no shadowing. Requires mavenLocal.
+
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     implementation('org.jooq:joor:0.9.14')
     // to evaluate settings.priceformula in config NoOneFishing
     implementation('net.objecthunter:exp4j:0.4.8')
-    implementation(files('libs\\javassist.jar'))
-
-
 }
 
 
-def targetJavaVersion = 8
+def targetJavaVersion = 17
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -66,9 +63,10 @@ processResources {
 
 
 jar {
-    manifest {
-        attributes "Premain-Class" : "fr.nobody.fix.fishsell.fix.Fix"
-    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    exclude("module-info.class")
+    exclude("mojang-translations/**") // exclude mojangs ...
     // Will include every single one of your dependencies, project or not
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }

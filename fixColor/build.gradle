@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'fr.nobody.fix'
+version '1.0-SNAPSHOT'
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation(files('libs\\javassist.jar'))
+}
+
+jar {
+    manifest {
+        attributes "Premain-Class" : "fr.nobody.fix.FixColor"
+    }
+    // Will include every single one of your dependencies, project or not
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

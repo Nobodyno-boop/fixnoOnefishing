@@ -69,24 +69,31 @@ public class RemoteConfig {
         if(FishSell.getInstance().getConfig().getBoolean("fix.slot.offhand", false)){
             contents = (ItemStack[]) ArrayUtils.add(contents, p.getInventory().getItemInOffHand());
         }
+        System.out.println("Content size: "+contents.length);
+
         Arrays.stream(contents).forEach(itemStack -> {
-
             if(itemStack != null){
-                if(!(itemStack.isSimilar(p.getInventory().getHelmet()))){
-                    Double d =  FishSell.getInstance().getRemoteConfig().ifFish(itemStack);
-
-                    if(d != -1.0){
-                        if(itemStack.getAmount() > 1){
-                            z.updateAndGet(v -> v + d * itemStack.getAmount());
-                        } else {
-                            z.updateAndGet(v -> v + d );
+                Double d =  FishSell.getInstance().getRemoteConfig().ifFish(itemStack);
+                if(d != -1.0){
+                    if(itemStack.getAmount() > 1){
+                        z.updateAndGet(v -> v + d * itemStack.getAmount());
+                    } else {
+                        z.updateAndGet(v -> v + d );
+                    }
+                    c.updateAndGet(v -> v + itemStack.getAmount());
+                    boolean action = false;
+                    if(FishSell.getInstance().getConfig().getBoolean("fix.slot.offhand", false) || FishSell.getInstance().getConfig().getBoolean("fix.slot.head", false)){
+                        if(itemStack.isSimilar(p.getInventory().getItemInOffHand())){
+                            p.getInventory().setItemInOffHand(null); // set air
+                            action = true;
                         }
-                        c.updateAndGet(v -> v + itemStack.getAmount());
-                        if(FishSell.getInstance().getConfig().getBoolean("fix.slot.offhand", false) || FishSell.getInstance().getConfig().getBoolean("fix.slot.head", false) ){
-                            p.getInventory().removeItemAnySlot(itemStack);
-                        } else {
-                            p.getInventory().remove(itemStack);
+                        if(itemStack.isSimilar(p.getInventory().getHelmet())){
+                            p.getInventory().setHelmet(null); // set air
+                            action = true;
                         }
+                    }
+                    if(!action){
+                        p.getInventory().remove(itemStack);
                     }
                 }
             }

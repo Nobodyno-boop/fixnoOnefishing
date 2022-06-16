@@ -33,6 +33,12 @@ jobs:
         run: ./gradlew dependencies
       - name: Execute Gradle build
         run: ./gradlew build
+      - name: Make gradlew executable on FixColor # https://github.com/actions/starter-workflows/issues/171#issuecomment-555036259
+        run: chmod +x ./fixColor/gradlew
+      - name: Sync Gradle dependencies on FixColor
+        run: ./fixColor/gradlew dependencies
+      - name: Execute Gradle build on FixColor
+        run: ./fixColor/gradlew build
       - uses: release-drafter/release-drafter@v5
         id: release
         env:
@@ -42,6 +48,7 @@ jobs:
         with:
           path: |
             build/build/*.jar
+            fixColor/build/libs/*.jar
             build.yml
           upload-release-files: true
           release-upload-url: ${{ steps.release.outputs.upload_url }}
