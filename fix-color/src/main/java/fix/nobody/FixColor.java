@@ -1,4 +1,4 @@
-package fr.nobody.fix;
+package fix.nobody;
 
 import javassist.ByteArrayClassPath;
 import javassist.ClassPool;

@@ -34,7 +34,7 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew build
       - name: Execute Gradle build on FixColor
-        run: ./gradlew :fixColor:build
+        run: ./gradlew :fix-color:build
       - uses: release-drafter/release-drafter@v5
         id: release
         env:
