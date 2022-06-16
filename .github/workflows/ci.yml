@@ -44,7 +44,7 @@ jobs:
         with:
           path: |
             build/build/*.jar
-            fixColor/build/libs/*.jar
+            fix-color/build/libs/*.jar
             build.yml
           upload-release-files: true
           release-upload-url: ${{ steps.release.outputs.upload_url }}
