@@ -57,24 +57,24 @@ public class FishConfig {
 
 }
 
-class FishSection{
+class FishSection {
     private String key;
     private ConfigurationSection section;
 
-    public FishSection(String key, ConfigurationSection section){
+    public FishSection(String key, ConfigurationSection section) {
         this.key = key;
         this.section = section;
     }
 
 
-    public <T extends Object> T g(T t, String ...args){
-        return (T) section.get(parse(args), t);
+    public <T extends Object> T g(String... args) {
+        return (T) section.get(parse(args));
     }
 
-    public Boolean has(String ...args){
-        try{
+    public Boolean has(String... args) {
+        try {
             return section.contains(parse(args));
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

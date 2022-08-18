@@ -46,10 +46,8 @@ public class RemoteConfig {
                 String rarity = container.get(nbtrarity, PersistentDataType.STRING);
                 Double pr = container.getOrDefault(nbtprice, PersistentDataType.DOUBLE, -1.0);
                 Double d = f.getDouble("raritymod."+ rarity);
-
-                if(pr != -1.0){
+                if (pr > 0) {
                     String formula = f.getString("settings.priceformula").replace("{price}", pr.toString()).replace("{weight}", weight.toString()).replace("{raritymod}", d.toString());
-
                     Double price = (new ExpressionBuilder(formula)).build().evaluate();
                     return price;
                 } else return -1.0;
