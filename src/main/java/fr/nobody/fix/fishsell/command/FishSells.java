@@ -13,7 +13,7 @@ public class FishSells implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(command.getName().equalsIgnoreCase("fishsell") && FishSell.getInstance().getConfig().getBoolean("fix.command.custom", false)){
-            if(sender instanceof Player && sender.isOp()){
+            if (sender instanceof Player || sender.hasPermission("") || sender.isOp()) {
                 Player p = (Player) sender;
                 FishSell.getInstance().getRemoteConfig().sellfish(p);
             }

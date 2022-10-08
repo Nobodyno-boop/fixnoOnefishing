@@ -1,7 +1,10 @@
 # FishSell
 
-A Plugin for fix the sell command (in [NoOneFishing](https://www.spigotmc.org/resources/noonefishing-30-unique-fish-with-a-huge-number-of-settings-baits-competition-antiafk-system.93692/)) & hex Color ([NoOneFishing](https://www.spigotmc.org/resources/noonefishing-30-unique-fish-with-a-huge-number-of-settings-baits-competition-antiafk-system.93692/) & [NoOneRods](https://www.spigotmc.org/resources/noonerods-custom-fishing-rods-with-crafting-recipes-bonuses-add-on-for-noonefishing.94796/)) 
-
+A Plugin for fix the sell command (
+in [NoOneFishing](https://www.spigotmc.org/resources/noonefishing-30-unique-fish-with-a-huge-number-of-settings-baits-competition-antiafk-system.93692/))
+& hex
+Color ([NoOneFishing](https://www.spigotmc.org/resources/noonefishing-30-unique-fish-with-a-huge-number-of-settings-baits-competition-antiafk-system.93692/)
+& [NoOneRods](https://www.spigotmc.org/resources/noonerods-custom-fishing-rods-with-crafting-recipes-bonuses-add-on-for-noonefishing.94796/))
 
 - [1. Why ?](#why-)
     * [1.1 Duplication](#duplication-probleme)
@@ -9,15 +12,20 @@ A Plugin for fix the sell command (in [NoOneFishing](https://www.spigotmc.org/re
     * [1.3 solutions](#the-fix)
         + [1.3.1 fix the color](#fix-the-color-)
 
+- [Config](#config)
+- [Commands](#command)
+
 # Why ?
+
 Because the actual version have a major bug (the 1.2.0).
 
 ---
+
 ### Duplication probleme
 
 ![image](./md/bug.gif)
 
-- Hex color not supported only in 1.18 and higher
+- Hex color not supported only in 1.18 and higher with a additional .jar
 
 
 
@@ -55,19 +63,36 @@ The default config
 | `fix.slot.offhand`    | Remove fish in off hand | Remove the fish in offhand slot while execute `/nfsell Inventory`                   | true    |
 | `plugin.update.check` | Check update            | Check if the plugin can be updated only at the start                                | true    |
 
+# Command
 
+| name            | permission                      |
+|-----------------|---------------------------------|
+| fishsell        | fishsell.command.fishsell       |
+| fishsellreload  | fishsell.command.fishsellreload |
 
 # Changelog
+
+## v1.3.21 - 08/10/2022
+
+- Add permissions for commands
+
 ## v1.3 - 14/03/2021
- - add config [Feature #9](#9)
+
+- add config [Feature #9](#9)
 
 ## v1.2 - 15-01-2021
- - Add instrument for javaAgent for modify the current hexMethod.
+
+- Add instrument for javaAgent for modify the current hexMethod.
+
 ## v1.1 - 15-12-2021
- ### Added 
- - Updater for check the latest version and print a message at the startup
- ### Fix
- - The price can be `null` so we ignore this item [issue-2](GH-2)
+
+### Added
+
+- Updater for check the latest version and print a message at the startup
+
+### Fix
+
+- The price can be `null` so we ignore this item [issue-2](GH-2)
 
 ## v1.0 - 14-12-2021
  ### Added

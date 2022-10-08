@@ -12,6 +12,7 @@ depend:
 commands:
   fishsell:
     description: replace the basic command
+    permission: fishsell.command.fishsell
   fishsellreload:
     description: reload plugin config
-    permission: op
+    permission: fishsell.command.fishsellreload
