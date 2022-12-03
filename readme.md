@@ -5,9 +5,8 @@ A Plugin for fix the sell command (in [NoOneFishing](https://www.spigotmc.org/re
 
 - [1. Why ?](#why-)
     * [1.1 Duplication](#duplication-probleme)
-    * [1.2 Hex color not support](#12-scope)
     * [1.3 solutions](#the-fix)
-        + [1.3.1 fix the color](#fix-the-color-)
+        + [1.3.1 fix the color](#color)
 
 # Why ?
 Because the actual version have a major bug (the 1.2.0).
@@ -29,14 +28,20 @@ Because the actual version have a major bug (the 1.2.0).
 - you can use `/fishsell` its work too.
 - When you reload NoOneFishing its still work :)
 
+# Color
+### ⚠️  FishSell-1.3.1.jar does not contains the javaagent anymore !
+Related to #12 new version of spigot/other doing some weird stuff and losing injection dependencies.
 
-# Fix the color ? 
-Just add this JAVA args in your startup server. (For 1.18+ before its work.)
-*You don't need to put the plugin in your plugins folder for works.*
+Now you can download the fix color jar in standalone version.
 
-```shell
-    -javaagent:plugins/FishSell-x.jar
+Steps:
+1. Download the fix-color-1.3.1.jar and place it into your server folder
+2. Put this java argrument on your startup command 
+3. Enjoy hex color :D
+```bash
+-javaagent:fix-color-1.3.1.jar
 ```
+
 
 # Download
 
